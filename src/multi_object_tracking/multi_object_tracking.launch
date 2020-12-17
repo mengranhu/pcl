@@ -1,0 +1,6 @@
+<launch>
+    <arg name="threshold" default="0.8"/>
+    <node pkg="multi_object_tracking" type="multi_object_tracking_node" name="multi_object_tracking_node" output="screen">
+        <param name="threshold" value="$(arg threshold)"/>
+    </node>
+</launch>

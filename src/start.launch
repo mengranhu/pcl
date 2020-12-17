@@ -1,0 +1,16 @@
+<launch>
+    <!-- 注意这里bag文件的路径必须为绝对路径-->
+    <node pkg="rosbag" type="play" name="playe" output="screen" args="-l --clock /home/ryze/pcl_ws/10.bag"/>
+
+    <node pkg="pcl_filter" type="pcl_filter_node" name="pcl_filter_node" output="screen"/>
+    <node pkg="euclidean_cluster" type="euclidean_cluster_node" name="euclidean_cluster_node" output="screen"/>
+
+    <arg name="threshold" default="0.8"/>
+    <node pkg="multi_object_tracking" type="multi_object_tracking_node" name="multi_object_tracking_node" output="screen">
+        <param name="threshold" value="$(arg threshold)"/>
+    </node>
+
+    <!-- 在rviz中显示-->
+    <node pkg="rviz" type="rviz" name="rviz" args="../.rviz/3d-point-deal.rviz" required="true" />
+
+</launch>
